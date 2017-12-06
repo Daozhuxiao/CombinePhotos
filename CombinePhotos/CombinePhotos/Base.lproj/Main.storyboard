@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -37,6 +38,94 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="508" y="34"/>
+        </scene>
+        <!--相簿-->
+        <scene sceneID="xMe-mo-1u2">
+            <objects>
+                <tableViewController id="keq-9N-J2D" customClass="AlbumTableViewController" customModule="CombinePhotos" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dYe-ti-7ME">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlbumTableViewCell" rowHeight="66" id="OyK-MF-nHU" customClass="AlbumTableViewCell" customModule="CombinePhotos" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="66"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OyK-MF-nHU" id="FG8-1d-cNK">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IqU-XP-66U">
+                                            <rect key="frame" x="15" y="8" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="17P-YT-kB7"/>
+                                                <constraint firstAttribute="width" secondItem="IqU-XP-66U" secondAttribute="height" multiplier="1:1" id="Ali-PA-3sB"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="所有照片" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajc-jL-pPp">
+                                            <rect key="frame" x="75" y="25" width="57.5" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="（183）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3JH-EZ-Tmf">
+                                            <rect key="frame" x="132.5" y="25.5" width="52.5" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3JH-EZ-Tmf" secondAttribute="trailing" constant="50" id="6Nr-tG-kMy"/>
+                                        <constraint firstItem="IqU-XP-66U" firstAttribute="leading" secondItem="FG8-1d-cNK" secondAttribute="leading" constant="15" id="LQu-3A-WkZ"/>
+                                        <constraint firstItem="3JH-EZ-Tmf" firstAttribute="leading" secondItem="ajc-jL-pPp" secondAttribute="trailing" id="S8Y-aB-WOW"/>
+                                        <constraint firstItem="3JH-EZ-Tmf" firstAttribute="height" secondItem="ajc-jL-pPp" secondAttribute="height" id="Y3k-3J-fOu"/>
+                                        <constraint firstItem="ajc-jL-pPp" firstAttribute="leading" secondItem="IqU-XP-66U" secondAttribute="trailing" constant="10" id="dAd-Cl-I49"/>
+                                        <constraint firstItem="3JH-EZ-Tmf" firstAttribute="centerY" secondItem="ajc-jL-pPp" secondAttribute="centerY" id="oeN-mJ-Bue"/>
+                                        <constraint firstItem="IqU-XP-66U" firstAttribute="centerY" secondItem="FG8-1d-cNK" secondAttribute="centerY" id="pw4-sw-Rdk"/>
+                                        <constraint firstItem="ajc-jL-pPp" firstAttribute="centerY" secondItem="FG8-1d-cNK" secondAttribute="centerY" id="suG-Vf-ZxM"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="albumNameLabel" destination="ajc-jL-pPp" id="N7V-7v-jCH"/>
+                                    <outlet property="albumPhotoCountLabel" destination="3JH-EZ-Tmf" id="PYx-cE-8UN"/>
+                                    <outlet property="coverImageView" destination="IqU-XP-66U" id="gfi-MK-Yot"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="keq-9N-J2D" id="hfl-if-gcP"/>
+                            <outlet property="delegate" destination="keq-9N-J2D" id="HGx-zE-GAI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="相簿" id="MN7-Hp-Paz">
+                        <barButtonItem key="rightBarButtonItem" title="取消" id="vfi-Wa-Ct3">
+                            <connections>
+                                <action selector="cancelButtonDidClicked:" destination="keq-9N-J2D" id="W0G-Be-9K7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JGi-Nf-SZE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1425" y="797"/>
+        </scene>
+        <!--Photo Picker Navigation Controller-->
+        <scene sceneID="xLF-5L-VBO">
+            <objects>
+                <navigationController id="Or1-ZF-ksm" customClass="PhotoPickerNavigationController" customModule="CombinePhotos" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gjg-zq-gos">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="keq-9N-J2D" kind="relationship" relationship="rootViewController" id="Tms-CU-RXA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V5Z-9L-ZtE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="535" y="797"/>
         </scene>
         <!--Set Layout View Controller-->
         <scene sceneID="lmz-cn-zkk">
@@ -62,7 +151,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="combinePhotos:" destination="VIL-w9-qBx" eventType="touchUpInside" id="prv-G1-wXd"/>
+                                    <segue destination="Or1-ZF-ksm" kind="presentation" id="Hai-7N-2wK"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -72,6 +161,7 @@
                             <constraint firstAttribute="trailing" secondItem="Ql3-ym-Nu4" secondAttribute="trailing" constant="20" id="9v1-Lt-ZX8"/>
                             <constraint firstItem="Ql3-ym-Nu4" firstAttribute="top" secondItem="Q20-rO-bsf" secondAttribute="top" constant="200" id="rTQ-IB-1pl"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="bvj-gi-yS8"/>
                     </view>
                     <connections>
                         <outlet property="buttonTopConstraint" destination="rTQ-IB-1pl" id="JDZ-ny-Paz"/>
@@ -80,7 +170,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lmC-5h-VXk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-258" y="803"/>
+            <point key="canvasLocation" x="-260" y="797"/>
         </scene>
     </scenes>
 </document>

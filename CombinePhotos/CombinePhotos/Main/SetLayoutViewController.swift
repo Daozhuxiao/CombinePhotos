@@ -105,10 +105,6 @@ class SetLayoutViewController: UIViewController {
         
     }
     
-    
-    @IBAction func combinePhotos(_ sender: Any) {
-        
-    }
     /*
     // MARK: - Navigation
 
