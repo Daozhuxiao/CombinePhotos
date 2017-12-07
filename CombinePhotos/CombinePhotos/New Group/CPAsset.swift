@@ -51,4 +51,13 @@ class CPAsset {
         }
         return previewImage
     }
+    
+    func requestThumbnailImage(size: CGSize, completion: @escaping (UIImage?, [AnyHashable : Any]?) -> Void) -> NSInteger {
+        let imageRequestOptions = PHImageRequestOptions()
+        imageRequestOptions.resizeMode = .fast
+        
+        return NSInteger(CPAssetsManager.sharedInstance.cachingImageManager.requestImage(for: asset, targetSize: CGSize(width: size.width * UIScreen.main.scale, height: size.height * UIScreen.main.scale), contentMode: .aspectFill, options: imageRequestOptions, resultHandler: { (image, info) in
+            completion(image, info)
+        }))
+    }
 }

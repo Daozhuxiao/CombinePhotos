@@ -43,6 +43,7 @@ class AlbumTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "goToSeePhotos", sender: allAlbums[indexPath.row])
     }
     /*
     // Override to support conditional editing of the table view.
@@ -79,15 +80,17 @@ class AlbumTableViewController: UITableViewController {
     }
     */
 
-    /*
+   
+     
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "goToSeePhotos" {
+            let photoCollectionVC = segue.destination as! PhotoCollectionViewController
+            let group = sender as! CPAssetsGroup
+            photoCollectionVC.assetGroup = group
+        }
     }
-    */
+    
 
     @IBAction func cancelButtonDidClicked(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
