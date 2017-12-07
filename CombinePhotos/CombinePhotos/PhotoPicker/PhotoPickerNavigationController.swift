@@ -12,6 +12,10 @@ import Photos
 class PhotoPickerNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let photosVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotosViewController") as!PhotosViewController
+        photosVC.assetGroup = CPAssetsManager.sharedInstance.mainAlbum()
+        self.viewControllers.append(photosVC)
     }
 
     

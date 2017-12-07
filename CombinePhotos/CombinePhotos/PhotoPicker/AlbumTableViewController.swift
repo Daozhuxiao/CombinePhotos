@@ -85,9 +85,9 @@ class AlbumTableViewController: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToSeePhotos" {
-            let photoCollectionVC = segue.destination as! PhotoCollectionViewController
+            let photoVC = segue.destination as! PhotosViewController
             let group = sender as! CPAssetsGroup
-            photoCollectionVC.assetGroup = group
+            photoVC.assetGroup = group
         }
     }
     

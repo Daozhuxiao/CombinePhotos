@@ -51,6 +51,18 @@ class CPAssetsManager: NSObject {
     }
     
     // MARK: - 取照片相关
+    func mainAlbum() -> CPAssetsGroup? {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "mediaType = %i", PHAssetMediaType.image.rawValue)
+        
+        let fetchResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
+        if fetchResult.count == 1 {
+            return CPAssetsGroup(assetCollection: fetchResult.firstObject!, fetchOptions: fetchOptions)
+        } else {
+            return nil
+        }
+    }
+    
     func enumberateAllAlbums(showEmptyAlbum: Bool, handle: ((CPAssetsGroup?) -> Void)) -> Void {
         var albumsArray = [PHAssetCollection]()
         let fetchOptions = PHFetchOptions()
