@@ -7,22 +7,9 @@
 //
 
 import UIKit
-import Photos
 
-class AlbumModel {
-    let album: PHAssetCollection
-    let coverImage: UIImage
-    let photoCount: Int
-    init(album: PHAssetCollection, coverImage: UIImage, photoCount: Int) {
-        self.album = album
-        self.coverImage = coverImage
-        self.photoCount = photoCount
-    }
-}
 
 class AlbumTableViewController: UITableViewController {
-    var albumFetchResult: PHFetchResult<PHAssetCollection>?
-    var albumModels = [AlbumModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,24 +18,6 @@ class AlbumTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        loadAlbum()
-    }
-    
-    func loadAlbum() -> Void {
-        albumFetchResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
-        guard albumFetchResult != nil else {
-            print("albumFetchResult = nil")
-            return
-        }
-        
-        for index in 0 ..< albumFetchResult!.count {
-            let collection = albumFetchResult![index]
-            let assetFetchResult = PHAsset.fetchAssets(in: collection, options: nil)
-            if assetFetchResult.count > 0 {
-                
-            }
-        }
     }
 
 
@@ -59,20 +28,12 @@ class AlbumTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let albumFetchResult = albumFetchResult {
-            return albumFetchResult.count
-        } else {
-            return 0
-        }
+         return 0
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumTableViewCell", for: indexPath) as! AlbumTableViewCell
-        let asset = allAssets[indexPath.row].firstObject
-        //cell.reloadCell(coverImage: <#T##UIImage#>, albumName: <#T##String#>, photoCount: <#T##Int#>)
-
-        return cell
-    }
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//    }
 
     /*
     // Override to support conditional editing of the table view.
