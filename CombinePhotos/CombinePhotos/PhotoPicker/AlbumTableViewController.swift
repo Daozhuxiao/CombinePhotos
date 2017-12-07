@@ -10,14 +10,18 @@ import UIKit
 
 
 class AlbumTableViewController: UITableViewController {
+    private var allAlbums = [CPAssetsGroup]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.tableFooterView = UIView()
+        CPAssetsManager.sharedInstance.enumberateAllAlbums(showEmptyAlbum: false) { (group) in
+            if let group = group {
+                allAlbums.append(group)
+            } else {
+                tableView.reloadData()
+            }
+        }
     }
 
 
@@ -28,13 +32,18 @@ class AlbumTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return 0
+         return allAlbums.count
     }
 
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumTableViewCell", for: indexPath) as! AlbumTableViewCell
+        cell.reloadCell(model: allAlbums[indexPath.row])
+        return cell
+    }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

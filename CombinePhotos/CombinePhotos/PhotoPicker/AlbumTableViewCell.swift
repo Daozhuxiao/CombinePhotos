@@ -18,10 +18,10 @@ class AlbumTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    func reloadCell(coverImage: UIImage, albumName: String, photoCount: Int) -> Void {
-        coverImageView.image = coverImage
-        albumNameLabel.text = albumName
-        albumPhotoCountLabel.text = String(photoCount)
+    func reloadCell(model: CPAssetsGroup) -> Void {
+        coverImageView.image = model.posterImage(size: CGSize(width: 60, height: 60))
+        albumNameLabel.text = model.albumName()
+        albumPhotoCountLabel.text = "（" + String(model.numberOfAssets()) + "）"
     }
 
 }

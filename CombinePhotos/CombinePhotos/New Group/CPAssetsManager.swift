@@ -73,6 +73,17 @@ class CPAssetsManager: NSObject {
             }
         } // for
         
+        let userCollectionFetchResult = PHCollectionList.fetchTopLevelUserCollections(with: nil)
+        for index in 0 ..< userCollectionFetchResult.count {
+            let userCollection = userCollectionFetchResult[index]
+            if userCollection.isMember(of: PHAssetCollection.self) {
+                let assetFetchResult = PHAsset.fetchAssets(in: userCollection as! PHAssetCollection, options: fetchOptions)
+                if assetFetchResult.count > 0 || showEmptyAlbum {
+                    albumsArray.append(userCollection as! PHAssetCollection)
+                }
+            }
+        }
+        
         for index in 0 ..< albumsArray.count {
             handle(CPAssetsGroup(assetCollection: albumsArray[index], fetchOptions: fetchOptions))
         }
