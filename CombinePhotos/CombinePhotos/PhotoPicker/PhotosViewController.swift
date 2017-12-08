@@ -11,12 +11,14 @@ import Photos
 
 private let reuseIdentifier = "PhotoCollectionViewCell"
 
-class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, PhotoCollectionViewCellDelegate {
     var assetGroup: CPAssetsGroup?
     var allAssets = [CPAsset]()
-    var selectAsset = [String]()
+    var selectAssetIdentifies = [String]()
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var sendButton: UIBarButtonItem!
+    @IBOutlet weak var previewButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,7 +44,7 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
 
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -57,19 +59,42 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollec
         let asset = allAssets[indexPath.row]
         let _ = asset.requestThumbnailImage(size: CGSize(width: 100, height: 100)) { (image, info) in
             if info == nil || info![AnyHashable(PHImageResultIsDegradedKey)] as! Bool == true {
-                cell.reloadData(contentImage: image, isChoose: self.selectAsset.contains(asset.assetIdentify()))
+                cell.reloadData(contentImage: image, isChoose: self.selectAssetIdentifies.contains(asset.assetIdentify()), indexPath: indexPath)
             } else {
                 print("***************** 高清 *****************")
                 //let cell = collectionView.cellForItem(at: indexPath) as! PhotoCollectionViewCell
                 //cell.thumbnailImageView.image = image
             }
         }
-        
+        cell.delegate = self
         return cell
     }
 
+    // MARK: - PhotoCollectionViewCellDelegate
+    func photoCollectionCell(_ cell: PhotoCollectionViewCell, choosedIndex indexPath: IndexPath) {
+        let asset = allAssets[indexPath.row]
+        if let index = selectAssetIdentifies.index(of: asset.assetIdentify()) {
+            selectAssetIdentifies.remove(at: index)
+        } else {
+            selectAssetIdentifies.append(asset.assetIdentify())
+        }
+        updateToolBarUI()
+    }
+    
+    // MARK: - Navigation
     @IBAction func dismissVC(_ sender: UIBarButtonItem) {
         let navigationVC = self.navigationController as! PhotoPickerNavigationController
         navigationVC.dismiss(animated: true, completion: nil)
+    }
+    
+    func updateToolBarUI() -> Void {
+        if selectAssetIdentifies.count > 0 {
+            sendButton.isEnabled = true
+            previewButton.isEnabled = true
+            sendButton.title = "发送（\(selectAssetIdentifies.count)）"
+        } else {
+            sendButton.isEnabled = false
+            previewButton.isEnabled = false
+        }
     }
 }

@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -133,9 +132,9 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qKB-Ic-dVM">
                                 <rect key="frame" x="0.0" y="603" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="预览" id="QNJ-Bb-ihC"/>
+                                    <barButtonItem enabled="NO" title="预览" id="QNJ-Bb-ihC"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="u3u-ZT-6Tn"/>
-                                    <barButtonItem title="发送" id="akX-4P-QTt"/>
+                                    <barButtonItem enabled="NO" title="发送" id="akX-4P-QTt"/>
                                 </items>
                             </toolbar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XB2-pe-2du">
@@ -213,6 +212,8 @@
                     <connections>
                         <outlet property="collectionView" destination="XB2-pe-2du" id="vEA-0S-1Kr"/>
                         <outlet property="flowLayout" destination="A8v-HF-dt0" id="qR4-xu-eGD"/>
+                        <outlet property="previewButton" destination="QNJ-Bb-ihC" id="hB6-sL-kyA"/>
+                        <outlet property="sendButton" destination="akX-4P-QTt" id="X1R-lM-NFW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GhG-DJ-1Wo" userLabel="First Responder" sceneMemberID="firstResponder"/>
