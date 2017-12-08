@@ -132,7 +132,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qKB-Ic-dVM">
                                 <rect key="frame" x="0.0" y="603" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem enabled="NO" title="预览" id="QNJ-Bb-ihC"/>
+                                    <barButtonItem enabled="NO" title="预览" id="QNJ-Bb-ihC">
+                                        <connections>
+                                            <action selector="previewButtonDidClicked:" destination="brK-30-Jfx" id="fNp-pb-Vcb"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="u3u-ZT-6Tn"/>
                                     <barButtonItem enabled="NO" title="发送" id="akX-4P-QTt"/>
                                 </items>
@@ -214,11 +218,47 @@
                         <outlet property="flowLayout" destination="A8v-HF-dt0" id="qR4-xu-eGD"/>
                         <outlet property="previewButton" destination="QNJ-Bb-ihC" id="hB6-sL-kyA"/>
                         <outlet property="sendButton" destination="akX-4P-QTt" id="X1R-lM-NFW"/>
+                        <segue destination="9hB-uk-Sfd" kind="push" identifier="previewPhoto" id="eb7-ez-PL0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GhG-DJ-1Wo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1488" y="886"/>
+        </scene>
+        <!--1 / 6-->
+        <scene sceneID="bDA-0C-otZ">
+            <objects>
+                <viewController storyboardIdentifier="PrePhotosViewController" id="9hB-uk-Sfd" customClass="PrePhotosViewController" customModule="CombinePhotos" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="h4N-fk-2T2"/>
+                        <viewControllerLayoutGuide type="bottom" id="m8x-Xo-fqT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gfC-YP-QVZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vX9-0M-qEV">
+                                <rect key="frame" x="0.0" y="64" width="375" height="583"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vX9-0M-qEV" firstAttribute="leading" secondItem="gfC-YP-QVZ" secondAttribute="leading" id="STc-zr-fiY"/>
+                            <constraint firstItem="vX9-0M-qEV" firstAttribute="top" secondItem="h4N-fk-2T2" secondAttribute="bottom" id="cg8-kp-OJk"/>
+                            <constraint firstItem="m8x-Xo-fqT" firstAttribute="top" secondItem="vX9-0M-qEV" secondAttribute="bottom" id="mM5-S3-cM3"/>
+                            <constraint firstAttribute="trailing" secondItem="vX9-0M-qEV" secondAttribute="trailing" id="yx3-3k-b6w"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="1 / 6" id="zM2-bv-ab2">
+                        <barButtonItem key="rightBarButtonItem" image="select" id="iSm-Zj-lOg"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="scrollView" destination="vX9-0M-qEV" id="AEx-li-UbP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aOA-rw-vOy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2020" y="888"/>
         </scene>
         <!--Photo Picker Navigation Controller-->
         <scene sceneID="xLF-5L-VBO">
@@ -286,6 +326,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="select" width="44" height="44"/>
         <image name="unselect" width="44" height="44"/>
     </resources>
 </document>

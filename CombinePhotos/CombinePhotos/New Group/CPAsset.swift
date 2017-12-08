@@ -60,4 +60,12 @@ class CPAsset {
             completion(image, info)
         }))
     }
+    
+    func requestPreviewImage(completion: @escaping (UIImage?, [AnyHashable : Any]?) -> Void) -> NSInteger {
+        let imageRequestOptions = PHImageRequestOptions()
+        imageRequestOptions.isNetworkAccessAllowed = true
+        return NSInteger(CPAssetsManager.sharedInstance.cachingImageManager.requestImage(for: asset, targetSize: UIScreen.main.bounds.size, contentMode: .aspectFill, options: imageRequestOptions, resultHandler: { (image, info) in
+            completion(image, info)
+        }))
+    }
 }

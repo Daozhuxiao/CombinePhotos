@@ -23,6 +23,7 @@
 		A24BCBBF1FD583A8000DA76D /* CombinePhotosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24BCBBE1FD583A8000DA76D /* CombinePhotosTests.swift */; };
 		A24BCBCA1FD583A8000DA76D /* CombinePhotosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24BCBC91FD583A8000DA76D /* CombinePhotosUITests.swift */; };
 		A24BCBD91FD58749000DA76D /* SetLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24BCBD81FD58749000DA76D /* SetLayoutViewController.swift */; };
+		A29725691FDA3F7C00104DB9 /* PrePhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29725681FDA3F7C00104DB9 /* PrePhotosViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		A24BCBC91FD583A8000DA76D /* CombinePhotosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinePhotosUITests.swift; sourceTree = "<group>"; };
 		A24BCBCB1FD583A8000DA76D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A24BCBD81FD58749000DA76D /* SetLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLayoutViewController.swift; sourceTree = "<group>"; };
+		A29725681FDA3F7C00104DB9 /* PrePhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrePhotosViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				A222A6831FD79D18002734B4 /* AlbumTableViewCell.swift */,
 				A212F2991FD9836900DDEA95 /* PhotosViewController.swift */,
 				A212F2951FD94C8300DDEA95 /* PhotoCollectionViewCell.swift */,
+				A29725681FDA3F7C00104DB9 /* PrePhotosViewController.swift */,
 			);
 			path = PhotoPicker;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				A212F29A1FD9836900DDEA95 /* PhotosViewController.swift in Sources */,
 				A212F2961FD94C8300DDEA95 /* PhotoCollectionViewCell.swift in Sources */,
 				A222A6841FD79D18002734B4 /* AlbumTableViewCell.swift in Sources */,
+				A29725691FDA3F7C00104DB9 /* PrePhotosViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

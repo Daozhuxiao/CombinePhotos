@@ -14,7 +14,8 @@ private let reuseIdentifier = "PhotoCollectionViewCell"
 class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, PhotoCollectionViewCellDelegate {
     var assetGroup: CPAssetsGroup?
     var allAssets = [CPAsset]()
-    var selectAssetIdentifies = [String]()
+    var selectAssetIndexPaths = [IndexPath]()
+    var selectAssets = [CPAsset]()
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var sendButton: UIBarButtonItem!
@@ -59,7 +60,7 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollec
         let asset = allAssets[indexPath.row]
         let _ = asset.requestThumbnailImage(size: CGSize(width: 100, height: 100)) { (image, info) in
             if info == nil || info![AnyHashable(PHImageResultIsDegradedKey)] as! Bool == true {
-                cell.reloadData(contentImage: image, isChoose: self.selectAssetIdentifies.contains(asset.assetIdentify()), indexPath: indexPath)
+                cell.reloadData(contentImage: image, isChoose: self.selectAssetIndexPaths.contains(indexPath), indexPath: indexPath)
             } else {
                 print("***************** 高清 *****************")
                 //let cell = collectionView.cellForItem(at: indexPath) as! PhotoCollectionViewCell
@@ -73,25 +74,40 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate, UICollec
     // MARK: - PhotoCollectionViewCellDelegate
     func photoCollectionCell(_ cell: PhotoCollectionViewCell, choosedIndex indexPath: IndexPath) {
         let asset = allAssets[indexPath.row]
-        if let index = selectAssetIdentifies.index(of: asset.assetIdentify()) {
-            selectAssetIdentifies.remove(at: index)
+        if let index = selectAssetIndexPaths.index(of: indexPath) {
+            selectAssetIndexPaths.remove(at: index)
+            selectAssets.remove(at: index)
         } else {
-            selectAssetIdentifies.append(asset.assetIdentify())
+            selectAssetIndexPaths.append(indexPath)
+            selectAssets.append(asset)
         }
         updateToolBarUI()
     }
     
     // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "previewPhoto" {
+            let vc = segue.destination as! PrePhotosViewController
+            vc.previewAssets = sender as! [CPAsset]
+        }
+    }
+    
+    
     @IBAction func dismissVC(_ sender: UIBarButtonItem) {
         let navigationVC = self.navigationController as! PhotoPickerNavigationController
         navigationVC.dismiss(animated: true, completion: nil)
     }
     
+    
+    @IBAction func previewButtonDidClicked(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "previewPhoto", sender: selectAssets)
+    }
+    
     func updateToolBarUI() -> Void {
-        if selectAssetIdentifies.count > 0 {
+        if selectAssetIndexPaths.count > 0 {
             sendButton.isEnabled = true
             previewButton.isEnabled = true
-            sendButton.title = "发送（\(selectAssetIdentifies.count)）"
+            sendButton.title = "发送（\(selectAssetIndexPaths.count)）"
         } else {
             sendButton.isEnabled = false
             previewButton.isEnabled = false
