@@ -16,19 +16,22 @@ class PrePhotosViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.title = "1 / \(previewAssets.count)"
         
+        scrollView.contentSize = CGSize(width: scrollView.bounds.size.width * CGFloat(previewAssets.count), height: 0)
+        scrollView.isPagingEnabled = true
         loadPreviewPhoto()
     }
 
     func loadPreviewPhoto() -> Void {
-        if let asset = previewAssets.first {
-            let _ = asset.requestPreviewImage(completion: { (image, info) in
-                DispatchQueue.main.async {
+        DispatchQueue.main.async {
+            for index in 0 ..< self.previewAssets.count {
+                let asset = self.previewAssets[index]
+                let _ = asset.requestPreviewImage(completion: { (image, info) in
                     let imageView = UIImageView(image: image)
                     imageView.contentMode = .scaleAspectFit
-                    imageView.frame = self.scrollView.bounds
+                    imageView.frame = self.scrollView.bounds.offsetBy(dx: CGFloat(index) * self.scrollView.bounds.size.width, dy: 0)
                     self.scrollView.addSubview(imageView)
-                }
-            })
+                })
+            }
         }
     }
     
